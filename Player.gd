@@ -17,7 +17,6 @@ func get_input():
 	var steer_to = steer
 	if Input.is_action_pressed("space"):
 		speed_to = lerp(speed_to, speed_to/2, 0.2)
-		steer_to = steer_to * 1.2
 	if Input.is_action_pressed("right_arrow"):
 		if speed > 0:
 			steer_to += 1
