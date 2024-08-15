@@ -4,10 +4,12 @@ var velocity = Vector2()
 var steer = 0
 var speed = 0
 var rot_speed = 0.15
-var max_steer = 10
+var max_steer = 15
 var opt_speed = 30
 var max_speed = 300
 var min_speed = 10
+var acceleration = 1.2
+var breaking = 0.5
 
 signal set_hud
 
@@ -29,9 +31,9 @@ func get_input():
 	if Input.is_action_pressed("left_arrow"):
 		steer_to = -max_steer
 	if Input.is_action_pressed("up_arrow"):
-		speed_to = max_speed
+		speed_to = max_speed * acceleration
 	if Input.is_action_pressed("down_arrow"):
-		speed_to = -max_speed/2
+		speed_to = -max_speed * breaking
 	if Input.is_action_pressed("space"):
 		get_drift()
 		
@@ -50,7 +52,7 @@ func get_physics(speed_to, steer_to):
 
 
 	# Physics with LERP
-	speed = lerp(speed, speed_to, 0.02)
+	speed = lerp(speed, speed_to, 0.01)
 	steer = lerp(steer, steer_to, 0.1)
 
 

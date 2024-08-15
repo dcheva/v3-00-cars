@@ -37,11 +37,11 @@ text = "Text line 1
 Text line 2"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_limit_begin = Vector2( -10000, -10000 )
-scroll_limit_end = Vector2( 10000, 10000 )
+scroll_limit_begin = Vector2( -100000, -100000 )
+scroll_limit_end = Vector2( 100000, 100000 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 640, 640 )
+motion_mirroring = Vector2( 1280, 640 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 4 )

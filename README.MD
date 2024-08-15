@@ -3,4 +3,5 @@
 - Implement simple arcade car physics 
 - Add fonts
 - Implement _on_Player_set_hud(), set Camera.position, set_label(args)
-- Begin generate sceme background
+- Begin generate sand background
+- Fix sand "Browny" BG, overlay and variables
