@@ -4,6 +4,15 @@ extends Node2D
 var cam = Vector2()
 
 
+func _ready():
+	pass
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("alt_enter"):
+		OS.window_fullscreen = !OS.window_fullscreen  
+
+
 func _on_Player_set_hud():
 	var pos = $Player.position
 	var rot = $Player.rotation_degrees
