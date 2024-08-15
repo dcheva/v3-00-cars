@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://fonts/sf-mono/SFMonoBold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://backs/Brownz.png" type="Texture" id=4]
+[ext_resource path="res://Track-l.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Track-s.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -14,8 +16,20 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2( -100000, -100000 )
+scroll_limit_end = Vector2( 100000, 100000 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1280, 640 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 4 )
+centered = false
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 320 )
+z_index = 500
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )
@@ -36,15 +50,15 @@ custom_fonts/font = SubResource( 1 )
 text = "Text line 1
 Text line 2"
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_limit_begin = Vector2( -100000, -100000 )
-scroll_limit_end = Vector2( 100000, 100000 )
+[node name="Track-l" parent="." instance=ExtResource( 5 )]
+position = Vector2( 512, 366 )
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1280, 640 )
+[node name="Track-s" parent="." instance=ExtResource( 6 )]
+position = Vector2( 508, 408 )
+rotation = 0.261799
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 4 )
-centered = false
+[node name="Track-s2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 498, 432 )
+rotation = 0.523599
 
 [connection signal="set_hud" from="Player" to="." method="_on_Player_set_hud"]

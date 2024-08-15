@@ -10,7 +10,7 @@ func _on_Player_set_hud():
 	var vel = $Player.velocity
 	var speed = $Player.speed
 	var steer = $Player.steer
-	var cam = pos + Vector2(int(vel.x),int(vel.y/2))
+	cam = pos + Vector2(int(vel.x),int(vel.y/2))
 	set_label([pos,rot,vel,speed,steer,cam])
 	$Camera.position = cam
 
