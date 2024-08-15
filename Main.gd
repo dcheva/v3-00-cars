@@ -1,6 +1,9 @@
 extends Node2D
 
 
+var cam = Vector2()
+
+
 func _on_Player_set_hud():
 	var pos = $Player.position
 	var rot = $Player.rotation_degrees

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://fonts/sf-mono/SFMonoBold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://backs/Brownz.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -34,5 +35,16 @@ margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
 text = "Text line 1
 Text line 2"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2( -10000, -10000 )
+scroll_limit_end = Vector2( 10000, 10000 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 4 )
+centered = false
 
 [connection signal="set_hud" from="Player" to="." method="_on_Player_set_hud"]
