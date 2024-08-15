@@ -31,3 +31,8 @@ polygon = PoolVector2Array( 9.10668, -3.20513, 9.10668, 3.52564, 9.97399, 3.5256
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="DrawTrack" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="DrawTrack" to="." method="_on_DrawTrack_timeout"]

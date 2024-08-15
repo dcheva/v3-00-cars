@@ -5,13 +5,18 @@ var steer = 0
 var speed = 0
 var rot_speed = 0.15
 var max_steer = 15
-var opt_speed = 30
 var max_speed = 300
-var min_speed = 10
+var opt_speed = 80
+var min_speed = 20
 var acceleration = 1.2
-var breaking = 0.5
+var breaking = -0.5
+var track_n = 0
 
 signal set_hud
+
+
+func _ready():
+	$DrawTrack.start()
 
 
 func _physics_process(delta):
@@ -33,7 +38,7 @@ func get_input():
 	if Input.is_action_pressed("up_arrow"):
 		speed_to = max_speed * acceleration
 	if Input.is_action_pressed("down_arrow"):
-		speed_to = -max_speed * breaking
+		speed_to = max_speed * breaking
 	if Input.is_action_pressed("space"):
 		get_drift()
 		
@@ -42,6 +47,7 @@ func get_input():
 
 func get_drift():
 	speed = lerp(speed, 0, 0.1)
+	steer = steer * 2
 
 
 func get_physics(speed_to, steer_to):
@@ -73,6 +79,11 @@ func get_physics(speed_to, steer_to):
 	if abs(speed) < min_speed:
 		steer = 0
 		if speed_to == 0:
-			speed = 0
+			speed = lerp(speed, 0, 0.1)
 
 
+func _on_DrawTrack_timeout():
+	# Instantiate and draw tracks in main scene
+	track_n += 1
+	var t = "Draw track #%s" % track_n
+	print(t)
