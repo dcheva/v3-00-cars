@@ -10,13 +10,15 @@ var opt_speed = 80
 var min_speed = 20
 var acceleration = 1.2
 var breaking = -0.5
-var track_n = 0
 
 signal set_hud
 
+export(PackedScene) var Track_L_scene
+export(PackedScene) var Track_S_scene
+
 
 func _ready():
-	$DrawTrack.start()
+	pass
 
 
 func _physics_process(delta):
@@ -81,9 +83,3 @@ func get_physics(speed_to, steer_to):
 		if speed_to == 0:
 			speed = lerp(speed, 0, 0.1)
 
-
-func _on_DrawTrack_timeout():
-	# Instantiate and draw tracks in main scene
-	track_n += 1
-	var t = "Draw track #%s" % track_n
-	print(t)

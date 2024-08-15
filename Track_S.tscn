@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 16 )
 
-[node name="Track-s" type="StaticBody2D"]
+[node name="Track_S" type="StaticBody2D"]
 z_index = 100
 collision_layer = 0
 collision_mask = 0
@@ -14,4 +14,5 @@ collision_mask = 0
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )

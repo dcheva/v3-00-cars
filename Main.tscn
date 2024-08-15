@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://fonts/sf-mono/SFMonoBold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://backs/Brownz.png" type="Texture" id=4]
-[ext_resource path="res://Track-l.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Track-s.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -50,15 +48,9 @@ custom_fonts/font = SubResource( 1 )
 text = "Text line 1
 Text line 2"
 
-[node name="Track-l" parent="." instance=ExtResource( 5 )]
-position = Vector2( 512, 366 )
-
-[node name="Track-s" parent="." instance=ExtResource( 6 )]
-position = Vector2( 508, 408 )
-rotation = 0.261799
-
-[node name="Track-s2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 498, 432 )
-rotation = 0.523599
+[node name="DrawTrack" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="set_hud" from="Player" to="." method="_on_Player_set_hud"]
+[connection signal="timeout" from="DrawTrack" to="." method="_on_DrawTrack_timeout"]

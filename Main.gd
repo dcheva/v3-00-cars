@@ -1,11 +1,12 @@
-extends Node2D
-
+extends Node
 
 var cam = Vector2()
 
+var Track_S = preload("res://Track_S.tscn").instance()
+
 
 func _ready():
-	pass
+	$DrawTrack.start()
 
 
 func _process(_delta):
@@ -32,3 +33,8 @@ func set_label(args):
 	l.text += "Rotation : %s\n" % int(args[1])
 	l.text += "Velocity : %s, %s\n" % [int(args[2][0]), int(args[2][1])]
 	l.text += "Camera   : %s, %s\n" % [int(args[5][0]), int(args[5][1])]
+
+
+func _on_DrawTrack_timeout():
+	# Instantiate and draw tracks on the main scene
+	add_child(Track_S)

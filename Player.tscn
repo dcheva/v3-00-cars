@@ -17,22 +17,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -17 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -2.98023e-08, -17 )
-scale = Vector2( 2.306, 3.12 )
-build_mode = 1
-polygon = PoolVector2Array( 9.10668, -3.20513, 9.10668, 3.52564, 9.97399, 3.52564, 9.97399, 7.37179, 9.10668, 7.37179, 9.10668, 9.9359, -9.10668, 9.9359, -9.10668, 7.37179, -9.97399, 7.37179, -9.97399, 3.52564, -9.10668, 3.52564, -9.10668, -3.20513, -9.97399, -3.20513, -9.97399, -7.05128, -6.07112, -9.9359, 6.07112, -9.9359, 9.97399, -7.05128, 9.97399, -3.20513 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DrawTrack" type="Timer" parent="."]
-wait_time = 0.2
-
-[connection signal="timeout" from="DrawTrack" to="." method="_on_DrawTrack_timeout"]
