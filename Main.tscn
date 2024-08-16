@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://backs/Brownz.png" type="Texture" id=4]
 [ext_resource path="res://Track_L.tscn" type="PackedScene" id=5]
 [ext_resource path="res://loops/intro.wav" type="AudioStream" id=6]
+[ext_resource path="res://backs/gravel.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -58,6 +59,28 @@ autoplay = true
 [node name="DrawTrack" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="Statics" type="Node2D" parent="."]
+position = Vector2( 680, 271 )
+
+[node name="TileMap" type="TileMap" parent="Statics"]
+format = 1
+
+[node name="Sprite" type="Sprite" parent="Statics/TileMap"]
+position = Vector2( 0, 1 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="Statics/TileMap"]
+position = Vector2( 256, 1 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="Statics/TileMap"]
+position = Vector2( 0, 257 )
+texture = ExtResource( 7 )
+
+[node name="Sprite4" type="Sprite" parent="Statics/TileMap"]
+position = Vector2( 256, 257 )
+texture = ExtResource( 7 )
 
 [connection signal="set_draw_timer" from="Player" to="." method="_on_Player_set_draw_timer"]
 [connection signal="set_hud" from="Player" to="." method="_on_Player_set_hud"]
