@@ -8,10 +8,13 @@ var max_steer = 15
 var max_speed = 300
 var opt_speed = 80
 var min_speed = 20
-var acceleration = 1.2
 var breaking = -0.5
+var acceleration = 1.2
+var truck_l_speed = 145
+var truck_k_speed = 3
 
 signal set_hud
+signal set_draw_timer
 
 export(PackedScene) var Track_L_scene
 export(PackedScene) var Track_S_scene
@@ -58,11 +61,9 @@ func get_physics(speed_to, steer_to):
 	if speed < 0: 
 		steer_to = -steer_to
 
-
 	# Physics with LERP
 	speed = lerp(speed, speed_to, 0.01)
 	steer = lerp(steer, steer_to, 0.1)
-
 
 	# Speed ​​steering
 	if speed > 0:
@@ -71,11 +72,9 @@ func get_physics(speed_to, steer_to):
 		if abs(speed) > opt_speed:
 			steer = steer * (max_speed - sqrt(abs(speed))) / max_speed
 
-
 	# Speed limits
 	steer  = clamp(steer, -max_steer, max_steer)
 	speed = clamp(speed, -max_speed/2, max_speed)
-
 
 	# Autobrake
 	if abs(speed) < min_speed:
@@ -83,3 +82,12 @@ func get_physics(speed_to, steer_to):
 		if speed_to == 0:
 			speed = lerp(speed, 0, 0.1)
 
+
+	if abs(speed) > min_speed:
+		emit_signal("set_draw_timer")
+
+func draw_truck_timer_formula():
+	if sqrt(abs(speed))!=0:
+		return truck_k_speed / sqrt(abs(speed))
+	else:
+		return 0.2

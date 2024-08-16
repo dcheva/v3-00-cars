@@ -6,5 +6,6 @@
 - Begin generate sand background
 - Fix sand "Browny" BG, overlay and variables
 ## Branch traces
-- Add prototypr tracks
+- Add prototype tracks
 - Add fullscreen to Main process
+- Working tracks
