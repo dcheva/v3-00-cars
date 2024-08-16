@@ -6,7 +6,7 @@
 [ext_resource path="res://backs/Brownz.png" type="Texture" id=4]
 [ext_resource path="res://Track_L.tscn" type="PackedScene" id=5]
 [ext_resource path="res://loops/intro.wav" type="AudioStream" id=6]
-[ext_resource path="res://backs/gravel.png" type="Texture" id=7]
+[ext_resource path="res://gravel.tres" type="TileSet" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -30,7 +30,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 320 )
+position = Vector2( 744, 344 )
 z_index = 500
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -64,23 +64,10 @@ one_shot = true
 position = Vector2( 680, 271 )
 
 [node name="TileMap" type="TileMap" parent="Statics"]
+tile_set = ExtResource( 7 )
+cell_quadrant_size = 8
 format = 1
-
-[node name="Sprite" type="Sprite" parent="Statics/TileMap"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 7 )
-
-[node name="Sprite2" type="Sprite" parent="Statics/TileMap"]
-position = Vector2( 256, 1 )
-texture = ExtResource( 7 )
-
-[node name="Sprite3" type="Sprite" parent="Statics/TileMap"]
-position = Vector2( 0, 257 )
-texture = ExtResource( 7 )
-
-[node name="Sprite4" type="Sprite" parent="Statics/TileMap"]
-position = Vector2( 256, 257 )
-texture = ExtResource( 7 )
+tile_data = PoolIntArray( -65537, 12, 0, -131072, 13, 0, -131071, 14, 0, -131070, 15, 0, -2, 3, 0, -1, 0, 0, -65536, 1, 0, -65535, 2, 0, -65534, 3, 0, -65533, 0, 0, 65534, 7, 0, 65535, 4, 0, 0, 5, 0, 1, 6, 0, 2, 7, 0, 3, 4, 0, 131070, 11, 0, 131071, 8, 0, 65536, 9, 0, 65537, 10, 0, 65538, 11, 0, 65539, 8, 0, 196606, 15, 0, 196607, 12, 0, 131072, 13, 0, 131073, 14, 0, 131074, 15, 0, 131075, 12, 0, 262143, 0, 0, 196608, 1, 0, 196609, 2, 0, 196610, 3, 0 )
 
 [connection signal="set_draw_timer" from="Player" to="." method="_on_Player_set_draw_timer"]
 [connection signal="set_hud" from="Player" to="." method="_on_Player_set_hud"]
