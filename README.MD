@@ -9,3 +9,5 @@
 - Add prototype tracks
 - Add fullscreen to Main process
 - Working tracks
+## Branch statics
+- Start proc-gen-world based on noise https://www.youtube.com/watch?v=rlUzizExe2Q
