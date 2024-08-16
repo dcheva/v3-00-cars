@@ -5,3 +5,7 @@
 - Implement _on_Player_set_hud(), set Camera.position, set_label(args)
 - Begin generate sand background
 - Fix sand "Browny" BG, overlay and variables
+## Branch traces
+- Add prototype tracks
+- Add fullscreen to Main process
+- Working tracks

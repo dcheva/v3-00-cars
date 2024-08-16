@@ -1,7 +1,18 @@
-extends Node2D
-
+extends Node
 
 var cam = Vector2()
+
+export var Track_S = preload("res://Track_S.tscn")
+export var Track_L = preload("res://Track_S.tscn")
+
+
+func _ready():
+	$DrawTrack.start()
+
+
+func _process(_delta):
+	if Input.is_action_just_pressed("alt_enter"):
+		OS.window_fullscreen = !OS.window_fullscreen  
 
 
 func _on_Player_set_hud():
@@ -10,8 +21,9 @@ func _on_Player_set_hud():
 	var vel = $Player.velocity
 	var speed = $Player.speed
 	var steer = $Player.steer
-	var cam = pos + Vector2(int(vel.x),int(vel.y/2))
-	set_label([pos,rot,vel,speed,steer,cam])
+	var trk = get_tree().get_nodes_in_group("track").size()
+	cam = pos + Vector2(int(vel.x),int(vel.y/2))
+	set_label([pos,rot,vel,speed,steer,cam,trk])
 	$Camera.position = cam
 
 
@@ -23,3 +35,26 @@ func set_label(args):
 	l.text += "Rotation : %s\n" % int(args[1])
 	l.text += "Velocity : %s, %s\n" % [int(args[2][0]), int(args[2][1])]
 	l.text += "Camera   : %s, %s\n" % [int(args[5][0]), int(args[5][1])]
+	l.text += "Tracks   : %s\n" % args[6]
+
+
+func _on_DrawTrack_timeout():
+	# Instantiate and draw tracks on the main scene
+	var track
+	if abs($Player.speed) > $Player.truck_l_speed:
+		track = Track_L.instance()
+	else:
+		track = Track_S.instance()
+	track.position = $Player.position
+	track.rotation = $Player.rotation
+	track.z_index = $Player.z_index - 1
+	add_child(track)
+	_set_draw_timer()
+
+func _on_Player_set_draw_timer():
+	_set_draw_timer()
+		
+func _set_draw_timer():
+	var w = $Player.draw_truck_timer_formula()
+	if $DrawTrack.is_stopped() or $DrawTrack.time_left > 1:
+		$DrawTrack.start(w)
