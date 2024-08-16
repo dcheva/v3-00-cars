@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-var velocity = Vector2()
+#var velocity = Vector2()
 var steer = 0
 var speed = 0
 var rot_speed = 0.15
@@ -16,8 +16,8 @@ var truck_k_speed = 3
 signal set_hud
 signal set_draw_timer
 
-export(PackedScene) var Track_L_scene
-export(PackedScene) var Track_S_scene
+@export var Track_L_scene: PackedScene
+@export var Track_S_scene: PackedScene
 
 
 func _ready():
@@ -28,7 +28,9 @@ func _physics_process(delta):
 	get_input()
 	rotation += steer * rot_speed * delta
 	velocity = Vector2(0, -speed).rotated(rotation)
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 	emit_signal("set_hud")
 
 
@@ -51,7 +53,7 @@ func get_input():
 
 
 func get_drift():
-	speed = lerp(speed, 0, 0.1)
+	speed = lerpf(speed, 0, 0.1)
 	steer = steer * 2
 
 
@@ -62,8 +64,8 @@ func get_physics(speed_to, steer_to):
 		steer_to = -steer_to
 
 	# Physics with LERP
-	speed = lerp(speed, speed_to, 0.01)
-	steer = lerp(steer, steer_to, 0.1)
+	speed = lerpf(speed, speed_to, 0.01)
+	steer = lerpf(steer, steer_to, 0.1)
 
 	# Speed ​​steering
 	if speed > 0:
@@ -74,13 +76,13 @@ func get_physics(speed_to, steer_to):
 
 	# Speed limits
 	steer  = clamp(steer, -max_steer, max_steer)
-	speed = clamp(speed, -max_speed/2, max_speed)
+	speed = clamp(speed, -max_speed/2.0, max_speed)
 
 	# Autobrake
 	if abs(speed) < min_speed:
 		steer = 0
 		if speed_to == 0:
-			speed = lerp(speed, 0, 0.1)
+			speed = lerpf(speed, 0, 0.1)
 
 
 	if abs(speed) > min_speed:
